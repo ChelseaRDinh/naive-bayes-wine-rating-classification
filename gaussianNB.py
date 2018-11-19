@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 #GaussianNB makes most sense because it is rule-based.
 from sklearn.naive_bayes import GaussianNB
-from sklearn.naive_bayes import MultinomialNB
+#Calculate accuracy score of our classifier
 from sklearn.metrics import accuracy_score
 
 #Variables for our data set:
