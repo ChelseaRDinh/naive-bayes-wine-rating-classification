@@ -22,11 +22,32 @@ import csv
 #price(?) --> If we want to deal with numeric attributes.
 
 def categorizeData():
-    return 0
+    columns = pd.read_csv('winemag-data_first150k.csv')
+    attributes = []
+    i = 0
+    for c in columns:
+        if i != 0:
+            attributes.append(c)
+        i = i+1
+    
+    reader = csv.reader(open('winemag-data_first150k.csv', newline=''))
+    #create list of instances that are strings, where each field is separated as a unique object
+    instances = []
+    i = 0
+    for row in reader:
+        if i != 0:
+            instances.append(row)
+        i = i+1
+    return attributes, instances
+
 
 def main():
     #Testing sklearn method functionality.
     classifier = GaussianNB()
-    print("Hello world.")
+    attributes, instances = categorizeData()
+    print('Attributes: '+str(attributes)+'\n\n')
+    for i in range(10):
+        print('Row '+str(i)+': '+str(instances[i])+'\n')
 
+#call main method
 main()
