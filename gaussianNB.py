@@ -24,6 +24,8 @@ import csv
 def categorizeData():
     columns = pd.read_csv('winemag-data_first150k.csv')
     attributes = []
+    class_vals = []
+
     i = 0
     for c in columns:
         if i != 0:
@@ -36,18 +38,22 @@ def categorizeData():
     i = 0
     for row in reader:
         if i != 0:
-            instances.append(row)
+            #remove first val of row, which is just the index of the instance in the csv file.
+            instances.append(row[1:])
+            #Make a list of class values, in our case, wine rating points for each wine instance.
+            class_vals.append(int(row[4]))
         i = i+1
-    return attributes, instances
-
+    return attributes, instances, class_vals
 
 def main():
     #Testing sklearn method functionality.
     classifier = GaussianNB()
-    attributes, instances = categorizeData()
-    print('Attributes: '+str(attributes)+'\n\n')
-    for i in range(10):
-        print('Row '+str(i)+': '+str(instances[i])+'\n')
-
+    attributes, instances, class_vals = categorizeData()
+    #print('Attributes: '+str(attributes)+'\n\n')
+    #Test print out a few of the rows just to make sure they're formatted correctly.
+    #for i in range(10):
+        #print('Row '+str(i)+': '+str(instances[i])+'\n')
+    #for i in range(10):
+        #print(class_vals[i])
 #call main method
 main()
