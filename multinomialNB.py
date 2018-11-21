@@ -18,6 +18,8 @@ def parseData():
     reader = csv.reader(open('winemag-data_first150k.csv', newline=''))
     #create list of instances that are strings, where each field is separated as a unique object
     text_instances = []
+    train_instances = []
+    train_labels = []
     i = 0
     for row in reader:
         if i != 0:
@@ -29,6 +31,10 @@ def parseData():
                 text_instances.append(sentence)
                 #Make a list of class values, in our case, wine rating points for each wine instance.
                 labels.append(int(row[4]))
+            elif i > 100 and i <=200:
+                sentence = re.findall(r"[\w']+", row[2])
+                train_instances.append(sentence)
+                train_labels.append(int(row[4]))
             else:
                 break
         i = i+1
